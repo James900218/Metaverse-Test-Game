@@ -29,36 +29,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Accelerate"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""e2778974-4f40-477a-9ff5-301246ccbd05"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Deccelerate"",
-                    ""type"": ""Button"",
-                    ""id"": ""7daca81f-af78-4438-9e6a-3c3c48a6f8d4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SteerRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""d84b92bf-56ad-43d2-b7c6-2454bc34cb6e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SteerLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""acb67d61-f139-448d-ac93-3a89e54a5410"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Steering"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e313b3a2-34b4-4876-8202-563ea6afb904"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -66,48 +48,70 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""a3f93329-3179-4915-b243-b0a0ad36f8bd"",
+                    ""name"": ""Throttle"",
+                    ""id"": ""b3469726-7f68-4b76-b1dd-ed870ce7acb3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""15a48a4e-c5ee-4c4b-992d-6e88a1e23ff6"",
                     ""path"": ""<Keyboard>/#(W)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""b6e78fa4-484d-4e2d-8f60-beb85656f720"",
+                    ""name"": ""negative"",
+                    ""id"": ""ca8767b8-1453-47f0-be24-cb22a1e77bd6"",
                     ""path"": ""<Keyboard>/#(S)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Deccelerate"",
+                    ""action"": ""Accelerate"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""eb86cf80-dbff-4dab-b933-1ff34dd06836"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steering"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""9cc75c9e-6ac4-439f-8964-b46f8de2e320"",
+                    ""name"": ""positive"",
+                    ""id"": ""5e304d81-cfe9-4464-8689-fcbb1e089d5f"",
                     ""path"": ""<Keyboard>/#(D)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SteerRight"",
+                    ""action"": ""Steering"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""8c777c28-f30c-4a0d-b79f-75704756849c"",
+                    ""name"": ""negative"",
+                    ""id"": ""2f880aec-bddd-49cf-bff5-cd569c68e743"",
                     ""path"": ""<Keyboard>/#(A)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SteerLeft"",
+                    ""action"": ""Steering"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -117,9 +121,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // Default
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Accelerate = m_Default.FindAction("Accelerate", throwIfNotFound: true);
-        m_Default_Deccelerate = m_Default.FindAction("Deccelerate", throwIfNotFound: true);
-        m_Default_SteerRight = m_Default.FindAction("SteerRight", throwIfNotFound: true);
-        m_Default_SteerLeft = m_Default.FindAction("SteerLeft", throwIfNotFound: true);
+        m_Default_Steering = m_Default.FindAction("Steering", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -182,17 +184,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Default;
     private List<IDefaultActions> m_DefaultActionsCallbackInterfaces = new List<IDefaultActions>();
     private readonly InputAction m_Default_Accelerate;
-    private readonly InputAction m_Default_Deccelerate;
-    private readonly InputAction m_Default_SteerRight;
-    private readonly InputAction m_Default_SteerLeft;
+    private readonly InputAction m_Default_Steering;
     public struct DefaultActions
     {
         private @InputActions m_Wrapper;
         public DefaultActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Accelerate => m_Wrapper.m_Default_Accelerate;
-        public InputAction @Deccelerate => m_Wrapper.m_Default_Deccelerate;
-        public InputAction @SteerRight => m_Wrapper.m_Default_SteerRight;
-        public InputAction @SteerLeft => m_Wrapper.m_Default_SteerLeft;
+        public InputAction @Steering => m_Wrapper.m_Default_Steering;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -205,15 +203,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Accelerate.started += instance.OnAccelerate;
             @Accelerate.performed += instance.OnAccelerate;
             @Accelerate.canceled += instance.OnAccelerate;
-            @Deccelerate.started += instance.OnDeccelerate;
-            @Deccelerate.performed += instance.OnDeccelerate;
-            @Deccelerate.canceled += instance.OnDeccelerate;
-            @SteerRight.started += instance.OnSteerRight;
-            @SteerRight.performed += instance.OnSteerRight;
-            @SteerRight.canceled += instance.OnSteerRight;
-            @SteerLeft.started += instance.OnSteerLeft;
-            @SteerLeft.performed += instance.OnSteerLeft;
-            @SteerLeft.canceled += instance.OnSteerLeft;
+            @Steering.started += instance.OnSteering;
+            @Steering.performed += instance.OnSteering;
+            @Steering.canceled += instance.OnSteering;
         }
 
         private void UnregisterCallbacks(IDefaultActions instance)
@@ -221,15 +213,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Accelerate.started -= instance.OnAccelerate;
             @Accelerate.performed -= instance.OnAccelerate;
             @Accelerate.canceled -= instance.OnAccelerate;
-            @Deccelerate.started -= instance.OnDeccelerate;
-            @Deccelerate.performed -= instance.OnDeccelerate;
-            @Deccelerate.canceled -= instance.OnDeccelerate;
-            @SteerRight.started -= instance.OnSteerRight;
-            @SteerRight.performed -= instance.OnSteerRight;
-            @SteerRight.canceled -= instance.OnSteerRight;
-            @SteerLeft.started -= instance.OnSteerLeft;
-            @SteerLeft.performed -= instance.OnSteerLeft;
-            @SteerLeft.canceled -= instance.OnSteerLeft;
+            @Steering.started -= instance.OnSteering;
+            @Steering.performed -= instance.OnSteering;
+            @Steering.canceled -= instance.OnSteering;
         }
 
         public void RemoveCallbacks(IDefaultActions instance)
@@ -250,8 +236,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IDefaultActions
     {
         void OnAccelerate(InputAction.CallbackContext context);
-        void OnDeccelerate(InputAction.CallbackContext context);
-        void OnSteerRight(InputAction.CallbackContext context);
-        void OnSteerLeft(InputAction.CallbackContext context);
+        void OnSteering(InputAction.CallbackContext context);
     }
 }
