@@ -12,7 +12,7 @@ public class Buoyancy : MonoBehaviour
 
     public void FixedUpdate()
     {
-        float waveHeight = WaterManager.instance.GetWaveHeight(transform.position.x);
+        //float waveHeight = WaterManager.instance.GetWaveHeight(transform.position.x);
         if (transform.position.y < 0f)
         {
             //if submerged, create a buoyancy forced based on how far submerged the object is -clamped 0,1- times the displacement amount
