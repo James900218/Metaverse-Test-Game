@@ -318,21 +318,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &300823819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460513533694301180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91e080b05ee9c974687fd5467175dcc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 300823818}
-  depthBeforeSubmerged: 1
-  displacementAmount: 3
 --- !u!136 &7800927806328855150
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -347,9 +332,31 @@ CapsuleCollider:
   m_Height: 9.917045
   m_Direction: 2
   m_Center: {x: 0.003767252, y: 1.2026622, z: -0.32002974}
+--- !u!114 &300823819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460513533694301180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e080b05ee9c974687fd5467175dcc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 300823818}
+  centerOfGravity: {fileID: 4146307768955691964}
+  depthBeforeSubmerged: 1
+  displacementAmount: 3
+  waterLevel: {fileID: 0}
 --- !u!4 &2238036120817338694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4a1b52a40dbaf294b93d95867ebd221a, type: 3}
+  m_PrefabInstance: {fileID: 1766994917499006637}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4146307768955691964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6841244424040018671, guid: 4a1b52a40dbaf294b93d95867ebd221a, type: 3}
   m_PrefabInstance: {fileID: 1766994917499006637}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8532759098660598040 stripped

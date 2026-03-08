@@ -12,15 +12,18 @@ public class FollowBezierCurve : MonoBehaviour
 
     private Vector3 followPosition;
 
-    [SerializeField] private float followSpeed;
+    [SerializeField] private float followSpeed = 0.02f;
 
     private bool coroutineAllowed;
+
+    [SerializeField] private bool followRotation;
+
+    [SerializeField] private Rigidbody rigidBody;
 
     void Start()
     {
         temp = 0;
         numOfRoutes = 0;
-        followSpeed = 0.5f;
         coroutineAllowed = true;
     }
 
@@ -29,6 +32,20 @@ public class FollowBezierCurve : MonoBehaviour
         if (coroutineAllowed)
         {
             StartCoroutine(followRoute(numOfRoutes));
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (followRotation)
+        {
+            Vector3 moveDir = rigidBody.velocity.normalized;
+            if (moveDir != Vector3.zero)
+            {
+                rigidBody.transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            }
+
+
         }
     }
 
@@ -50,7 +67,7 @@ public class FollowBezierCurve : MonoBehaviour
                 3 * (1 - temp) * Mathf.Pow(temp, 2) * point2 +
                 Mathf.Pow(temp, 3) * point3;
 
-            transform.position = followPosition;
+            transform.position = new Vector3(followPosition.x, transform.position.y, followPosition.z);
             yield return new WaitForEndOfFrame();
         }
 
