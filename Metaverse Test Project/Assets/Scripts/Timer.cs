@@ -16,6 +16,9 @@ public class Timer : MonoBehaviour
     public bool shouldCountDown = false;
     public int countDownDurationInSeconds;
 
+    public bool timerStartsActive = false;
+    private bool timerIsActive;
+
     private void Start()
     {
         minutes = 0;
@@ -26,26 +29,31 @@ public class Timer : MonoBehaviour
         {
             SetCountDown();
         }
+
+        if (timerStartsActive)
+        {
+            timerIsActive = true;
+        }
     }
 
     private void Update()
     {
-        if (shouldCountDown)
+        if (timerStartsActive)
         {
-            if (minutes <= 0 & seconds <= 0)
+            if (shouldCountDown)
             {
-                Debug.Log("Timer Has Ended");
-                return;
+                if (minutes <= 0 & seconds <= 0)
+                {
+                    Debug.Log("Timer Has Ended");
+                    return;
+                }
+                else CountDown();
             }
-            else CountDown();
+            else
+            {
+                CountUp();
+            }
         }
-        else
-        {
-            CountUp();
-        }
-
-
-
     }
 
     private void SetSeconds()
@@ -122,6 +130,31 @@ public class Timer : MonoBehaviour
                     counter = 0;
                 }
             }
+        }
+    }
+
+    public void StartTimer()
+    {
+        timerIsActive = true;
+    }
+
+    public void StopTimer()
+    {
+        timerIsActive = false;
+    }
+
+    public void ResetTimer()
+    {
+        if (shouldCountDown)
+        {
+            minutes = 0;
+            seconds = countDownDurationInSeconds;
+            SetCountDown();
+        }
+        else
+        {
+            minutes = 0;
+            seconds = 0;
         }
     }
 }
