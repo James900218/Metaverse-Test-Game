@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class FollowBezierCurve : MonoBehaviour
 {
+    //this script allows a game object to follow the path of a bexier curve
+    // can optionally have the game object rotate in the direction of travel
+    // position of curve points
     [SerializeField] private Transform[] routes;
 
     private int numOfRoutes;
-
+    // temp value for the bezier algorithm,so that the path of the curve can be tracked across the time frame of 1 seconds
     private float temp;
 
     private Vector3 followPosition;
@@ -16,8 +19,10 @@ public class FollowBezierCurve : MonoBehaviour
 
     private bool coroutineAllowed;
 
+    // should follow direction as rotation?
     [SerializeField] private bool followRotation;
 
+    // for getting direction
     private Vector3 previousPosition;
 
     [SerializeField] private float rotationSpeed;
@@ -43,6 +48,7 @@ public class FollowBezierCurve : MonoBehaviour
     {
         if (followRotation)
         {
+            // get direction of travel
             Vector3 moveDir = (transform.position - previousPosition);
             moveDir.y = 0f;
 
@@ -53,9 +59,11 @@ public class FollowBezierCurve : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
             }
 
+            // set new position as next previous
             previousPosition = transform.position;
         }
 
+        // smoothes rotation
         transform.position += transform.right * Mathf.Sin(Time.time * 0.5f) * 0.1f;
     }
 
@@ -63,6 +71,7 @@ public class FollowBezierCurve : MonoBehaviour
     {
         coroutineAllowed = false;
 
+        // get points of the curve
         Vector3 point0 = routes[_numOfRoutes].GetChild(0).position;
         Vector3 point1 = routes[_numOfRoutes].GetChild(1).position;
         Vector3 point2 = routes[_numOfRoutes].GetChild(2).position;
@@ -70,6 +79,7 @@ public class FollowBezierCurve : MonoBehaviour
 
         while (temp < 1)
         {
+            // use bezier curve algorithm across time frame to translate the object along its path
             temp += Time.deltaTime * followSpeed;
 
             followPosition = Mathf.Pow(1 - temp, 3) * point0 +
@@ -85,6 +95,7 @@ public class FollowBezierCurve : MonoBehaviour
 
         numOfRoutes += 1;
 
+        // if there are more routes, start the next one
         if (numOfRoutes > routes.Length - 1)
         {
             numOfRoutes = 0;

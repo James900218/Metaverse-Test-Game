@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
+    //this script attaches the camera to an object with an offset
     public Transform followTransform;
     private Camera mainCamera;
 

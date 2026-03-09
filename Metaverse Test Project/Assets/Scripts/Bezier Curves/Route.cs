@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Route : MonoBehaviour
 {
+    //this script creates a bezier curve using an algorithm and gizmos to visualise the curve
+
     [SerializeField] private Transform[] controlPoints;  //Array to hold the points of the curve
 
     private Vector3 gizmosPosition; //position of each gizmo sphere to be drawn along the curve
