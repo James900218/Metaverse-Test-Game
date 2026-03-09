@@ -6,6 +6,7 @@ using UnityEngine;
 public class CompleteGame : MonoBehaviour
 {
     private BoxCollider boxCollider;
+    public GetFinalTime finalTimeUI;
     public Timer timer;
     public string Tag;
 
@@ -20,6 +21,8 @@ public class CompleteGame : MonoBehaviour
         if (timer.IsTimeUp())
         {
             Debug.Log("WIN");
+            finalTimeUI.gameObject.SetActive(true);
+            finalTimeUI.SetTime();
         }
         
     }

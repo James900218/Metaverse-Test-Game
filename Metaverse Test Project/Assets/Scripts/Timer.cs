@@ -210,4 +210,14 @@ public class Timer : MonoBehaviour
         }
 
     }
+
+    public int GetTimeMinutes()
+    {
+        return minutes;
+    }
+
+    public int GetTimeSeconds()
+    {
+        return seconds;
+    }
 }
