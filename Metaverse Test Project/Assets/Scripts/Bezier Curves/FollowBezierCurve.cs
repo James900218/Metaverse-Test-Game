@@ -18,13 +18,17 @@ public class FollowBezierCurve : MonoBehaviour
 
     [SerializeField] private bool followRotation;
 
-    [SerializeField] private Rigidbody rigidBody;
+    private Vector3 previousPosition;
+
+    [SerializeField] private float rotationSpeed;
 
     void Start()
     {
         temp = 0;
         numOfRoutes = 0;
         coroutineAllowed = true;
+
+        previousPosition = transform.position;
     }
 
     void Update()
@@ -39,14 +43,20 @@ public class FollowBezierCurve : MonoBehaviour
     {
         if (followRotation)
         {
-            Vector3 moveDir = rigidBody.velocity.normalized;
-            if (moveDir != Vector3.zero)
+            Vector3 moveDir = (transform.position - previousPosition);
+            moveDir.y = 0f;
+
+            // using a very small direction can cause unstable rotations
+            if (moveDir.sqrMagnitude > 0.0001f)
             {
-                rigidBody.transform.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+                Quaternion lookRotation = Quaternion.LookRotation(moveDir.normalized, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
             }
 
-
+            previousPosition = transform.position;
         }
+
+        transform.position += transform.right * Mathf.Sin(Time.time * 0.5f) * 0.1f;
     }
 
     private IEnumerator followRoute(int _numOfRoutes)
