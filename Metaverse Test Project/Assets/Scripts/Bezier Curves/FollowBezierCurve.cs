@@ -35,7 +35,7 @@ public class FollowBezierCurve : MonoBehaviour
     {
         if (coroutineAllowed)
         {
-            StartCoroutine(followRoute(numOfRoutes));
+            StartCoroutine(FollowRoute(numOfRoutes));
         }
     }
 
@@ -59,7 +59,7 @@ public class FollowBezierCurve : MonoBehaviour
         transform.position += transform.right * Mathf.Sin(Time.time * 0.5f) * 0.1f;
     }
 
-    private IEnumerator followRoute(int _numOfRoutes)
+    private IEnumerator FollowRoute(int _numOfRoutes)
     {
         coroutineAllowed = false;
 

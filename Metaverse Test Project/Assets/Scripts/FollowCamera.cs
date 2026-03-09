@@ -13,6 +13,9 @@ public class FollowCamera : MonoBehaviour
     void Start()
     {
         mainCamera = GetComponentInChildren<Camera>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

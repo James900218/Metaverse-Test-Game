@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rigidBody;
-    public Transform forcePoint;
 
     [Header("Acceleration")]
     public InputActionReference Throttle;
@@ -38,24 +37,25 @@ public class PlayerController : MonoBehaviour
     {
         MoveBoat();
         TurnBoat();
+        ApplyDrag();
     }
 
     private void MoveBoat()
     {
         if (rigidBody.velocity.magnitude < maxSpeed)
         {
-            rigidBody.AddForceAtPosition(movementDirection * (movementInput * movementForce), forcePoint.position);
+            rigidBody.AddForce(movementDirection * (movementInput * movementForce));
 
         }
     }
 
     private void TurnBoat()
     {
-        rigidBody.AddTorque(Vector3.up * moveRotation * turnTorque);
-        //rigidBody.transform.Rotate(0f, moveRotation * (movementInput * rotationForce), 0f);
+        float speedFactor = (rigidBody.velocity.magnitude / maxSpeed);
+        rigidBody.AddTorque(Vector3.up * moveRotation * turnTorque * speedFactor);
     }
 
-    private void applyDrag()
+    private void ApplyDrag()
     {
         Vector3 horizontalVelocity = rigidBody.velocity;
         horizontalVelocity.y = 0;
