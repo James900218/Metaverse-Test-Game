@@ -7,14 +7,22 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rigidBody;
     public Transform forcePoint;
-    public float movementForce = 10f;
-    public float rotationForce = 500f;
 
+    [Header("Acceleration")]
     public InputActionReference Throttle;
-    public InputActionReference Steering;
-
     private float movementInput;
+    public float movementForce = 10f;
+
+    public float maxSpeed = 10f;
+    public float waterDrag = 2f;
+
+    [Header("Steering")]
+    public InputActionReference Steering;
+    public float rotationForce = 500f;
     private float moveRotation;
+
+    public float turnTorque = 500f;
+    public float turnDrag = 2f;
 
     private Vector3 movementDirection;
 
@@ -22,15 +30,35 @@ public class PlayerController : MonoBehaviour
     {
         movementInput = Throttle.action.ReadValue<float>();
         moveRotation = Steering.action.ReadValue<float>();
-        
+
+        movementDirection = rigidBody.transform.forward;
     }
 
     private void FixedUpdate()
     {
-        movementDirection = rigidBody.transform.forward;
+        MoveBoat();
+        TurnBoat();
+    }
 
-        rigidBody.AddForceAtPosition(movementDirection * (movementInput * movementForce), forcePoint.position);
-        rigidBody.transform.Rotate(0f, moveRotation * (movementInput * rotationForce), 0f);
-        //rigidBody.AddForceAtPosition(moveRotation * rigidBody.transform.right * rotationForce / 100f, forcePoint.position);
+    private void MoveBoat()
+    {
+        if (rigidBody.velocity.magnitude < maxSpeed)
+        {
+            rigidBody.AddForceAtPosition(movementDirection * (movementInput * movementForce), forcePoint.position);
+
+        }
+    }
+
+    private void TurnBoat()
+    {
+        rigidBody.AddTorque(Vector3.up * moveRotation * turnTorque);
+        //rigidBody.transform.Rotate(0f, moveRotation * (movementInput * rotationForce), 0f);
+    }
+
+    private void applyDrag()
+    {
+        Vector3 horizontalVelocity = rigidBody.velocity;
+        horizontalVelocity.y = 0;
+        rigidBody.AddForce(-horizontalVelocity * waterDrag);
     }
 }
