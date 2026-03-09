@@ -12,18 +12,38 @@ public class CompleteGame : MonoBehaviour
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
+        timer.HideTimer(true);
     }
 
     private void FixedUpdate()
     {
+        if (timer.IsTimeUp())
+        {
+            Debug.Log("WIN");
+        }
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.rigidbody.CompareTag(Tag))
+        if (other.GetComponent<Rigidbody>().CompareTag(Tag))
         {
-
+            timer.HideTimer(false);
+            timer.StartTimer();
         }
+
+        Debug.Log("Enter");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Rigidbody>().CompareTag(Tag))
+        {
+            timer.HideTimer(true);
+            timer.ResetTimer();
+            timer.StopTimer();
+        }
+
+        Debug.Log("Exit");
     }
 }

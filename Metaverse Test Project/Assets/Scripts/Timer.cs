@@ -8,6 +8,9 @@ public class Timer : MonoBehaviour
     public Text minutesText;
     public Text secondsText;
 
+    private Color minutesTextAlpha;
+    private Color secondsTextAlpha;
+
     private int minutes;
     private int seconds;
 
@@ -19,11 +22,16 @@ public class Timer : MonoBehaviour
     public bool timerStartsActive = false;
     private bool timerIsActive;
 
+    public bool hideTimer = false;
+
     private void Start()
     {
         minutes = 0;
         seconds = 0;
         counter = 0;
+
+        minutesTextAlpha = minutesText.color;
+        secondsTextAlpha = secondsText.color;
 
         if (shouldCountDown)
         {
@@ -38,7 +46,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (timerStartsActive)
+        if (timerIsActive)
         {
             if (shouldCountDown)
             {
@@ -54,6 +62,7 @@ public class Timer : MonoBehaviour
                 CountUp();
             }
         }
+
     }
 
     private void SetSeconds()
@@ -131,6 +140,15 @@ public class Timer : MonoBehaviour
                 }
             }
         }
+
+        if (hideTimer)
+        {
+            HideTimer(true);
+        }
+        else if (!hideTimer)
+        {
+            HideTimer(false);
+        }
     }
 
     public void StartTimer()
@@ -156,5 +174,40 @@ public class Timer : MonoBehaviour
             minutes = 0;
             seconds = 0;
         }
+    }
+
+    public int GetTimeLeft()
+    {
+        return seconds + (minutes * 60);
+    }
+
+    public bool IsTimeUp()
+    {
+        if (GetTimeLeft() <= 0)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public void HideTimer(bool _isHidden)
+    {
+        if (_isHidden)
+        {
+            minutesTextAlpha.a = 0;
+            minutesText.color = minutesTextAlpha;
+
+            secondsTextAlpha.a = 0;
+            secondsText.color = secondsTextAlpha;
+        }
+        else
+        {
+            minutesTextAlpha.a = 1;
+            minutesText.color = minutesTextAlpha;
+
+            secondsTextAlpha.a = 1;
+            secondsText.color = secondsTextAlpha;
+        }
+
     }
 }
