@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 2066590946}
   m_Layer: 0
   m_Name: PFB_Powerboat
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,11 +167,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 300823818}
-  forcePoint: {fileID: 8532759098660598040}
-  movementForce: 20
-  rotationForce: 2
   Throttle: {fileID: -1722512816301378745, guid: eddc32f69e5753045b45c4ad485b2ba6, type: 3}
+  movementForce: 3000
+  maxSpeed: 100
+  waterDrag: 1.5
   Steering: {fileID: -2292064217934870687, guid: eddc32f69e5753045b45c4ad485b2ba6, type: 3}
+  rotationForce: 200
+  turnTorque: 1000
+  turnDrag: 2
 --- !u!114 &2066590944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTransform: {fileID: 2238036120817338694}
-  cameraOffset: {x: 0, y: 3.5, z: -12}
+  cameraOffset: {x: 0, y: -3.5, z: -12}
 --- !u!1001 &1766994917499006637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,6 +294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Powerboat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4a1b52a40dbaf294b93d95867ebd221a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4835951349805928252, guid: 4a1b52a40dbaf294b93d95867ebd221a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -310,13 +317,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460513533694301180}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 1
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1.5
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &7800927806328855150
 CapsuleCollider:
@@ -357,10 +364,5 @@ Transform:
 --- !u!4 &4146307768955691964 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6841244424040018671, guid: 4a1b52a40dbaf294b93d95867ebd221a, type: 3}
-  m_PrefabInstance: {fileID: 1766994917499006637}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8532759098660598040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -1229531407817678923, guid: 4a1b52a40dbaf294b93d95867ebd221a, type: 3}
   m_PrefabInstance: {fileID: 1766994917499006637}
   m_PrefabAsset: {fileID: 0}

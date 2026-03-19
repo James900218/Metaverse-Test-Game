@@ -473,54 +473,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 300823818, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 300823818, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: m_AngularDrag
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 300823818, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 300823818, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 300823819, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
       propertyPath: waterLevel
       value: 
       objectReference: {fileID: 2011340138}
-    - target: {fileID: 2066590943, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: maxSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066590943, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: waterDrag
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066590943, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: turnTorque
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066590943, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: movementForce
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066590943, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: rotationForce
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 2066590946, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: cameraOffset.y
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1460513533694301180, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 5045197895633781734, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -568,10 +524,6 @@ PrefabInstance:
     - target: {fileID: 7551963072996470970, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
       propertyPath: m_Name
       value: PFB_Powerboat
-      objectReference: {fileID: 0}
-    - target: {fileID: 7551963072996470970, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e05e112b2e6f83b4e8f11e99c4df1c1e, type: 3}
@@ -2989,7 +2941,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1916467190
 MonoBehaviour:
   m_ObjectHideFlags: 0
